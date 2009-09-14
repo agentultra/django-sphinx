@@ -269,6 +269,8 @@ class SphinxQuerySet(object):
         if 'rankmode' in kwargs:
             if kwargs.get('rankmode') is None:
                 kwargs['rankmode'] = sphinxapi.SPH_RANK_NONE
+        if 'mode' in kwargs:
+            kwargs['mode'] = getattr(sphinxapi, kwargs.get('mode'), 'SPH_MATCH_ALL')
         kwargs = dict([('_%s' % (key,), value) for key, value in kwargs.iteritems() if key in self.available_kwargs])
         return kwargs
 
